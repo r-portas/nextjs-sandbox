@@ -7,23 +7,24 @@ import sleep from "@/util/sleep";
  *
  * @param formData - The form data
  */
-export async function signUp(
+export async function addTask(
   prevState: { message: string },
   formData: FormData,
 ) {
   "use server";
 
-  const user = {
+  const task = {
     name: formData.get("name"),
-    email: formData.get("email"),
   };
 
   // Simulate the backend doing some work,
   // so we can show the loading state
   await sleep(1000);
 
-  // Call whatever backend code to sign a user up
-  // await signupUser(user);
+  const message = `Task "${task.name}" created`;
 
-  return { message: "User signed up successfully" };
+  // Call whatever backend code to sign a user up
+  console.log(`Server Action: ${message}`);
+
+  return { message };
 }

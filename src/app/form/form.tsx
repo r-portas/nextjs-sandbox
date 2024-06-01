@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { signUp } from "./actions";
+import { addTask } from "./actions";
 
 const initialState = {
   message: "",
@@ -19,21 +19,20 @@ function SubmitButton() {
 }
 
 export function Form() {
-  const [state, formAction] = useActionState(signUp, initialState);
+  const [state, formAction] = useActionState(addTask, initialState);
 
   return (
-    <form action={formAction}>
-      <label htmlFor="name">Enter Task</label>
-      <input type="text" id="name" name="name" required />
+    <>
+      <form action={formAction}>
+        <label htmlFor="name">Name</label>
+        <input type="text" id="name" name="name" required />
 
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" required />
+        <SubmitButton />
 
-      <SubmitButton />
-
-      <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
-      </p>
-    </form>
+        <p aria-live="polite" className="sr-only" role="status">
+          {state?.message}
+        </p>
+      </form>
+    </>
   );
 }
